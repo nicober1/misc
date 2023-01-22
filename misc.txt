@@ -32,3 +32,28 @@
 
             return null;
         }
+
+
+ public virtual Azure.Pageable<TaggedBlobItem> FindBlobsByTags(string tagFilterSqlExpression, CancellationToken cancellationToken = default)
+        {
+            return blobServiceClient.FindBlobsByTags(tagFilterSqlExpression, cancellationToken);
+        }
+
+        public virtual Azure.AsyncPageable<TaggedBlobItem> FindBlobsByTagsAsync(string tagFilterSqlExpression, CancellationToken cancellationToken = default)
+        {
+            return blobServiceClient.FindBlobsByTagsAsync(tagFilterSqlExpression, cancellationToken);
+        }
+
+
+        public virtual Azure.Pageable<TaggedBlobItem> FindBlobsByTags(string blobContainerName, string tagFilterSqlExpression, CancellationToken cancellationToken = default)
+        {
+            var blobContainerClient = blobServiceClient.GetBlobContainerClient(blobContainerName);
+            return blobContainerClient.FindBlobsByTags(tagFilterSqlExpression, cancellationToken);
+        }
+
+
+        public virtual Azure.AsyncPageable<TaggedBlobItem> FindBlobsByTagsAsync(string blobContainerName, string tagFilterSqlExpression, System.Threading.CancellationToken cancellationToken = default)
+        {
+            var blobContainerClient = blobServiceClient.GetBlobContainerClient(blobContainerName);
+            return blobContainerClient.FindBlobsByTagsAsync(tagFilterSqlExpression, cancellationToken);
+        }
